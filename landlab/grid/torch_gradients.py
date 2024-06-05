@@ -62,7 +62,6 @@ def calc_grad_at_link(grid, node_values, out=None):
     """
     if out is None:
         out = grid.empty(at="link")
-    breakpoint()
     out.to(node_values.device)
     length_of_link = torch.tensor(grid.length_of_link).to(node_values.device)
     return torch.divide(
