@@ -10,6 +10,7 @@ from .depth_dependent_taylor_soil_creep import DepthDependentTaylorDiffuser
 from .detachment_ltd_erosion import DepthSlopeProductErosion
 from .detachment_ltd_erosion import DetachmentLtdErosion
 from .diffusion import LinearDiffuser
+from .diffusion import TensorLinearDiffuser
 from .dimensionless_discharge import DimensionlessDischarge
 from .discharge_diffuser import DischargeDiffuser
 from .drainage_density import DrainageDensity
@@ -172,6 +173,7 @@ COMPONENTS = [
     BedParcelInitializerArea,
     BedParcelInitializerUserD50,
     TaylorNonLinearDiffuser,
+    TensorLinearDiffuser,
     TidalFlowCalculator,
     TransportLengthHillslopeDiffuser,
     TrickleDownProfiler,
