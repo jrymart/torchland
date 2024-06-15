@@ -4,7 +4,7 @@
 Gradient calculation functions
 ++++++++++++++++++++++++++++++
 
-.. autosummary::
+b.. autosummary::
 
     ~landlab.grid.gradients.calc_grad_at_link
     ~landlab.grid.gradients.calc_diff_at_link
@@ -63,11 +63,20 @@ def calc_grad_at_link(grid, node_values, out=None):
     if out is None:
         out = grid.empty(at="link")
     out.to(node_values.device)
+    rows = grid.number_of_node_rows
+    columns = grid.number_of_node_columns
+    
     length_of_link = torch.tensor(grid.length_of_link).to(node_values.device)
-    return torch.divide(
-        node_values[grid.node_at_link_head] - node_values[grid.node_at_link_tail],
-        length_of_link,
-        out=out,
+    horizontal_links = np.concatenate([np.arange(1,columns)+(2*columns-1)*i for i in range(rows)])
+    vertical_links = np.concatenate([np.arange(columns,2*columns)+(2*columns-1)*i for i in range(rows-1)])
+    out[horizontal_links] = torch.diff(node_values, dim=1)
+    out[vertical_links] = torch.diff(node_values, dim=0)
+    out = torch.divide(out, length_of_link)
+    return out
+    # return torch.divide(
+    #     node_values[grid.node_at_link_head] - node_values[grid.node_at_link_tail],
+    #     length_of_link,
+    #     out=out,
     )
 
 
