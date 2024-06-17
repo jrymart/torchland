@@ -4,7 +4,7 @@
 Gradient calculation functions
 ++++++++++++++++++++++++++++++
 
-b.. autosummary::
+.. autosummary::
 
     ~landlab.grid.gradients.calc_grad_at_link
     ~landlab.grid.gradients.calc_diff_at_link
